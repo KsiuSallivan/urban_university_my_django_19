@@ -1,0 +1,25 @@
+from task1.models import Buyer, Game
+
+# Создание записей Buyer
+buyer1 = Buyer.objects.create(name="Ann", balance=120.00, age=48)  # Взрослый
+buyer2 = Buyer.objects.create(name="Ksiu", balance=50.00, age=11)      # Младше 18
+buyer3 = Buyer.objects.create(name="Kate", balance=2000.00, age=60) # Взрослый
+
+# Создание записей Game
+game1 = Game.objects.create(title="Game 1", cost=20.00, size=5.0, description="Game 1", age_limited=True)
+game2 = Game.objects.create(title="Game 2", cost=30.00, size=10.0, description="Game 2", age_limited=False)
+game3 = Game.objects.create(title="Game 3", cost=40.00, size=15.0, description="Game 3", age_limited=True)
+
+# Связывание объектов
+# Buyer 1 (Ann) обладает всеми играми
+game1.buyers.set([buyer1])
+game2.buyers.set([buyer1])
+game3.buyers.set([buyer1])
+
+# Buyer 2 (Ksiu) обладает только Game 1
+game2.buyers.add(buyer2)
+
+# Buyer 3 (Kate) обладает двумя играми
+game1.buyers.add(buyer3)
+game2.buyers.add(buyer3)
+
